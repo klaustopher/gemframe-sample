@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GemframeSample</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "Fira Sans", "Segoe UI", sans-serif;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(145deg, #f7f4ec 0%, #dae6f8 100%);
+        color: #17303d;
+        display: grid;
+        place-items: center;
+      }
+
+      .panel {
+        width: min(900px, calc(100vw - 2rem));
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(23, 48, 61, 0.18);
+        border-radius: 14px;
+        padding: 1.25rem;
+        box-shadow: 0 14px 35px rgba(23, 48, 61, 0.15);
+      }
+
+      h1 {
+        margin: 0 0 0.75rem;
+        font-size: 1.25rem;
+      }
+
+      p {
+        margin: 0.4rem 0;
+      }
+
+      .module {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        border-radius: 10px;
+        border: 1px solid rgba(23, 48, 61, 0.18);
+        background: rgba(255, 255, 255, 0.7);
+      }
+
+      .module h2 {
+        margin: 0 0 0.6rem;
+        font-size: 1rem;
+      }
+
+      button {
+        margin-top: 0.3rem;
+        margin-right: 0.5rem;
+        border: 0;
+        border-radius: 10px;
+        background: #145e72;
+        color: #fefefe;
+        font-size: 0.95rem;
+        padding: 0.5rem 0.8rem;
+        cursor: pointer;
+      }
+
+      input {
+        border: 1px solid rgba(23, 48, 61, 0.25);
+        border-radius: 8px;
+        padding: 0.35rem 0.45rem;
+        min-width: 180px;
+        font-size: 0.9rem;
+      }
+
+      progress {
+        width: 100%;
+        height: 16px;
+        margin-top: 0.6rem;
+      }
+
+      .job-list {
+        margin-top: 0.8rem;
+        display: grid;
+        gap: 0.6rem;
+      }
+
+      .job-item {
+        border: 1px solid rgba(23, 48, 61, 0.2);
+        border-radius: 8px;
+        padding: 0.6rem;
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      .job-item p {
+        margin: 0.2rem 0;
+        font-size: 0.86rem;
+      }
+
+      pre {
+        margin-top: 1rem;
+        border-radius: 10px;
+        background: #10242d;
+        color: #ddf2ff;
+        padding: 0.75rem;
+        overflow: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="panel">
+      <h1>Crystal + WebView + Vite</h1>
+      <p>This page is served by Vite and rendered in native WebView.</p>
+      <p>
+        The command bridge is intentionally narrow:
+        <code>invoke(command, ...args)</code>
+      </p>
+      <p>
+        Backend-to-frontend events are delivered via:
+        <code>window.__GEMFRAME_SAMPLE__.__bridgeDispatch(envelope)</code>
+      </p>
+      <section class="module">
+        <h2>Hello Module</h2>
+        <button id="call-bridge">Call backend hello</button>
+        <pre id="hello-result">No result yet.</pre>
+      </section>
+      <section class="module">
+        <h2>Greeter Module</h2>
+        <p>
+          Name:
+          <input id="greeter-name" value="Klaus" />
+        </p>
+        <p>
+          ISO8601 time:
+          <input id="greeter-time" />
+        </p>
+        <button id="call-greeter">Call greeter.greet</button>
+        <pre id="greeter-result">No result yet.</pre>
+      </section>
+      <section class="module">
+        <h2>Math Module</h2>
+        <p>
+          Left:
+          <input id="math-left" value="12" />
+          Right:
+          <input id="math-right" value="3" />
+        </p>
+        <button id="math-add">Add</button>
+        <button id="math-subtract">Subtract</button>
+        <button id="math-multiply">Multiply</button>
+        <button id="math-divide">Divide</button>
+        <pre id="math-result">No result yet.</pre>
+      </section>
+      <section class="module">
+        <h2>Backend Job Module</h2>
+        <p>
+          Start a backend job. Backend emits progress events in 10% steps with
+          randomized delays (0.2s to 1.0s).
+        </p>
+        <button id="job-start">Start Demo Job</button>
+        <button id="job-clear-done">Remove Done Jobs</button>
+        <div id="job-list" class="job-list">No jobs yet.</div>
+        <pre id="job-result">No result yet.</pre>
+      </section>
+      <details class="module">
+        <summary><strong>Debug Area</strong></summary>
+        <pre id="debug-log">No debug entries yet.</pre>
+      </details>
+    </main>
+    <script type="module" src="/src/app/main.ts"></script>
+  </body>
+</html>

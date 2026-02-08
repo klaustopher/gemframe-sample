@@ -1,0 +1,16 @@
+# Crystal / Shards
+.shards/
+lib/
+bin/
+*.dwarf
+
+# Node (sample root)
+node_modules/
+npm-debug.log*
+
+# Frontend (Vite)
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.vite-temp/
+frontend/npm-debug.log*

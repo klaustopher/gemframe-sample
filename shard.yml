@@ -1,0 +1,18 @@
+name: gemframe-sample
+version: 0.1.0
+
+authors:
+  - Klaus Zanders <code@kgz.me>
+
+targets:
+  gemframe-sample:
+    main: src/gemframe_sample.cr
+
+dependencies:
+  webview:
+    github: naqvis/webview
+    version: ~> 0.2.5
+
+crystal: ">= 1.9.0"
+
+license: MIT
